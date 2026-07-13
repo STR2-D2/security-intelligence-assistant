@@ -2,3 +2,4 @@ pydantic-settings
 python-dotenv
 loguru
 SQLAlchemy
+pytest

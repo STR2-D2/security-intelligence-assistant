@@ -3,7 +3,7 @@ from loguru import logger
 from agents.base import BaseAgent
 from collectors.base import BaseCollector
 from collectors.dummy import DummyCollector
-from skills.storage import save_vulnerabilities
+from pipeline.collector_pipeline import CollectorPipeline
 
 
 class CollectorAgent(BaseAgent):
@@ -15,16 +15,32 @@ class CollectorAgent(BaseAgent):
 
     def run(self) -> None:
         logger.info("CollectorAgent run started")
+        total_fetched = 0
+        total_normalized = 0
+        total_rejected = 0
         total_inserted = 0
+
         for collector in self.collectors:
-            raw_items = collector.fetch()
-            logger.info(f"{collector.name} fetched {len(raw_items)} raw advisories")
-            vulnerabilities = collector.normalize(raw_items)
+            result = CollectorPipeline(collector).run()
+            total_fetched += result.fetched_count
+            total_normalized += result.normalized_count
+            total_rejected += result.rejected_count
+            total_inserted += result.inserted_count
+
             logger.info(
-                f"{collector.name} normalized {len(vulnerabilities)} vulnerabilities"
+                f"{result.collector_name} pipeline result: "
+                f"fetched={result.fetched_count}, "
+                f"normalized={result.normalized_count}, "
+                f"valid={result.valid_count}, "
+                f"rejected={result.rejected_count}, "
+                f"inserted={result.inserted_count}"
             )
-            inserted_count = save_vulnerabilities(vulnerabilities)
-            total_inserted += inserted_count
-            logger.info(f"{collector.name} inserted {inserted_count} vulnerabilities")
-        logger.info(f"CollectorAgent total inserted: {total_inserted}")
+
+        logger.info(
+            "CollectorAgent totals: "
+            f"fetched={total_fetched}, "
+            f"normalized={total_normalized}, "
+            f"rejected={total_rejected}, "
+            f"inserted={total_inserted}"
+        )
         logger.info("CollectorAgent run completed")
