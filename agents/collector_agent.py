@@ -19,6 +19,8 @@ class CollectorAgent(BaseAgent):
         total_normalized = 0
         total_rejected = 0
         total_inserted = 0
+        total_updated = 0
+        total_unchanged = 0
 
         for collector in self.collectors:
             try:
@@ -31,6 +33,8 @@ class CollectorAgent(BaseAgent):
             total_normalized += result.normalized_count
             total_rejected += result.rejected_count
             total_inserted += result.inserted_count
+            total_updated += result.updated_count
+            total_unchanged += result.unchanged_count
 
             logger.info(
                 f"{result.collector_name} pipeline result: "
@@ -38,7 +42,9 @@ class CollectorAgent(BaseAgent):
                 f"normalized={result.normalized_count}, "
                 f"valid={result.valid_count}, "
                 f"rejected={result.rejected_count}, "
-                f"inserted={result.inserted_count}"
+                f"inserted={result.inserted_count}, "
+                f"updated={result.updated_count}, "
+                f"unchanged={result.unchanged_count}"
             )
 
         logger.info(
@@ -46,6 +52,8 @@ class CollectorAgent(BaseAgent):
             f"fetched={total_fetched}, "
             f"normalized={total_normalized}, "
             f"rejected={total_rejected}, "
-            f"inserted={total_inserted}"
+            f"inserted={total_inserted}, "
+            f"updated={total_updated}, "
+            f"unchanged={total_unchanged}"
         )
         logger.info("CollectorAgent run completed")

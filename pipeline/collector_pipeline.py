@@ -13,6 +13,8 @@ class PipelineResult:
     valid_count: int
     rejected_count: int
     inserted_count: int
+    updated_count: int
+    unchanged_count: int
 
 
 class CollectorPipeline:
@@ -23,7 +25,7 @@ class CollectorPipeline:
         raw_items = self.collector.fetch()
         vulnerabilities = self.collector.normalize(raw_items)
         valid_items, rejected_items = validate_vulnerabilities(vulnerabilities)
-        inserted_count = storage.save_vulnerabilities(valid_items)
+        storage_result = storage.save_vulnerabilities(valid_items)
 
         return PipelineResult(
             collector_name=self.collector.name,
@@ -31,5 +33,7 @@ class CollectorPipeline:
             normalized_count=len(vulnerabilities),
             valid_count=len(valid_items),
             rejected_count=len(rejected_items),
-            inserted_count=inserted_count,
+            inserted_count=storage_result.inserted_count,
+            updated_count=storage_result.updated_count,
+            unchanged_count=storage_result.unchanged_count,
         )

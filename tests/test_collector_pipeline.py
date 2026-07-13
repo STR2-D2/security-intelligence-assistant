@@ -2,6 +2,7 @@ from datetime import UTC, datetime
 
 from collectors.base import BaseCollector, NormalizedVulnerability, RawAdvisory
 from pipeline.collector_pipeline import CollectorPipeline
+from skills.storage import StorageResult
 
 
 class FakeCollector(BaseCollector):
@@ -42,8 +43,9 @@ class FakeCollector(BaseCollector):
 
 
 def test_collector_pipeline_counts(monkeypatch) -> None:
-    def fake_save(vulnerabilities: list[NormalizedVulnerability]) -> int:
-        return len(vulnerabilities)
+    def fake_save(vulnerabilities: list[NormalizedVulnerability]) -> StorageResult:
+        assert len(vulnerabilities) == 1
+        return StorageResult(inserted_count=1, updated_count=2, unchanged_count=3)
 
     monkeypatch.setattr("skills.storage.save_vulnerabilities", fake_save)
 
@@ -55,3 +57,5 @@ def test_collector_pipeline_counts(monkeypatch) -> None:
     assert result.valid_count == 1
     assert result.rejected_count == 0
     assert result.inserted_count == 1
+    assert result.updated_count == 2
+    assert result.unchanged_count == 3

@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import UTC, datetime
 
 from collectors.base import BaseCollector, NormalizedVulnerability, RawAdvisory
 
@@ -13,7 +13,7 @@ class DummyCollector(BaseCollector):
                 source=self.name,
                 title="Dummy vulnerability advisory",
                 url="https://example.com/advisories/dummy",
-                published_at=datetime.utcnow(),
+                published_at=datetime.now(UTC),
                 raw_data={"severity": "low"},
             )
         ]
@@ -38,4 +38,3 @@ class DummyCollector(BaseCollector):
             )
             for raw in raw_items
         ]
-
