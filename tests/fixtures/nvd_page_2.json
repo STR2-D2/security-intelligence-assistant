@@ -1,0 +1,30 @@
+{
+  "resultsPerPage": 1,
+  "startIndex": 1,
+  "totalResults": 2,
+  "vulnerabilities": [
+    {
+      "cve": {
+        "id": "CVE-2099-0002",
+        "published": "2099-02-01T00:00:00Z",
+        "lastModified": "2099-02-02T00:00:00Z",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "Second English NVD description."
+          }
+        ],
+        "metrics": {
+          "cvssMetricV31": [
+            {
+              "cvssData": {
+                "baseScore": 8.1,
+                "baseSeverity": "HIGH"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

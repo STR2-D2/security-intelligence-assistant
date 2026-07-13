@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from datetime import UTC, datetime
 
 from loguru import logger
 from sqlalchemy import func, select
@@ -155,10 +156,8 @@ def _update_existing(
 
     for field in MUTABLE_FIELDS:
         new_value = getattr(vulnerability, field)
-        # Preserve populated text when an incoming source sends None or blank text.
-        if field in TEXT_FIELDS and _is_empty_text(new_value) and not _is_empty_text(
-            getattr(existing, field)
-        ):
+        new_value = _merge_value(existing, vulnerability, field, new_value)
+        if new_value is _SKIP_UPDATE:
             continue
         if getattr(existing, field) != new_value:
             setattr(existing, field, new_value)
@@ -167,5 +166,71 @@ def _update_existing(
     return changed
 
 
+_SKIP_UPDATE = object()
+
+
+def _merge_value(
+    existing: Vulnerability,
+    vulnerability: NormalizedVulnerability,
+    field: str,
+    new_value: object,
+) -> object:
+    existing_value = getattr(existing, field)
+
+    # Merge enrichment conservatively: empty incoming values do not erase populated
+    # text, while meaningful False/0 values and accumulated booleans remain valid.
+    if field in {"in_kev", "has_poc"}:
+        return bool(existing_value) or bool(new_value)
+
+    if field in {"source", "source_url"} and not _is_empty_text(existing_value):
+        return _SKIP_UPDATE
+
+    if (
+        field == "title"
+        and existing.in_kev
+        and vulnerability.source == "nvd"
+        and not _is_empty_text(existing_value)
+    ):
+        return _SKIP_UPDATE
+
+    if field in TEXT_FIELDS and _is_empty_text(new_value) and not _is_empty_text(
+        existing_value
+    ):
+        return _SKIP_UPDATE
+
+    if field == "cvss_score" and new_value is None and existing_value is not None:
+        return _SKIP_UPDATE
+
+    if field in {"published_at", "updated_at"}:
+        if new_value is None and existing_value is not None:
+            return _SKIP_UPDATE
+        if field == "published_at" and existing_value is not None and new_value is not None:
+            return new_value if not _same_datetime(existing_value, new_value) else existing_value
+        if field == "updated_at" and existing_value is not None and new_value is not None:
+            return _newer_datetime(existing_value, new_value)
+
+    return new_value
+
+
 def _is_empty_text(value: object) -> bool:
     return value is None or (isinstance(value, str) and not value.strip())
+
+
+def _newer_datetime(existing_value: object, new_value: object) -> object:
+    if not isinstance(existing_value, datetime) or not isinstance(new_value, datetime):
+        return new_value
+    existing_for_compare = _as_utc_for_compare(existing_value)
+    new_for_compare = _as_utc_for_compare(new_value)
+    return new_value if new_for_compare > existing_for_compare else existing_value
+
+
+def _same_datetime(existing_value: object, new_value: object) -> bool:
+    if not isinstance(existing_value, datetime) or not isinstance(new_value, datetime):
+        return existing_value == new_value
+    return _as_utc_for_compare(existing_value) == _as_utc_for_compare(new_value)
+
+
+def _as_utc_for_compare(value: datetime) -> datetime:
+    if value.tzinfo is None:
+        return value.replace(tzinfo=UTC)
+    return value.astimezone(UTC)

@@ -3,13 +3,14 @@ from loguru import logger
 from agents.base import BaseAgent
 from collectors.base import BaseCollector
 from collectors.cisa_kev import CisaKevCollector
+from collectors.nvd import NvdCollector
 from pipeline.collector_pipeline import CollectorPipeline
 
 
 class CollectorAgent(BaseAgent):
     def __init__(self) -> None:
         super().__init__(name="collector")
-        self.collectors: list[BaseCollector] = [CisaKevCollector()]
+        self.collectors: list[BaseCollector] = [CisaKevCollector(), NvdCollector()]
         logger.info("CollectorAgent initialized")
         logger.info(f"CollectorAgent collector count: {len(self.collectors)}")
 

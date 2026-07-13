@@ -1,6 +1,6 @@
 from collections.abc import Generator
 from contextlib import contextmanager
-from datetime import datetime
+from datetime import UTC, datetime
 
 import pytest
 from sqlalchemy import create_engine, func, select
@@ -109,19 +109,137 @@ def test_changed_vendor_or_product_updates_existing_record(isolated_storage) -> 
     assert existing.product == "New Product"
 
 
-def test_false_and_zero_values_can_update_existing_record(isolated_storage) -> None:
-    storage.save_vulnerabilities(
-        [make_vulnerability(has_poc=True, in_kev=True, cvss_score=9.1)]
-    )
+def test_zero_values_can_update_existing_record(isolated_storage) -> None:
+    storage.save_vulnerabilities([make_vulnerability(cvss_score=9.1)])
+    result = storage.save_vulnerabilities([make_vulnerability(cvss_score=0.0)])
+    existing = get_one(isolated_storage)
+
+    assert result.updated_count == 1
+    assert existing.cvss_score == 0.0
+
+
+def test_in_kev_true_is_preserved_during_enrichment(isolated_storage) -> None:
+    storage.save_vulnerabilities([make_vulnerability(source="cisa_kev", in_kev=True)])
     result = storage.save_vulnerabilities(
-        [make_vulnerability(has_poc=False, in_kev=False, cvss_score=0.0)]
+        [make_vulnerability(source="nvd", in_kev=False, cvss_score=9.8)]
     )
     existing = get_one(isolated_storage)
 
     assert result.updated_count == 1
-    assert existing.has_poc is False
-    assert existing.in_kev is False
-    assert existing.cvss_score == 0.0
+    assert existing.in_kev is True
+    assert existing.cvss_score == 9.8
+    assert count_rows(isolated_storage) == 1
+
+
+def test_has_poc_true_is_preserved_during_enrichment(isolated_storage) -> None:
+    storage.save_vulnerabilities([make_vulnerability(has_poc=True)])
+    result = storage.save_vulnerabilities([make_vulnerability(source="nvd", has_poc=False)])
+    existing = get_one(isolated_storage)
+
+    assert result.unchanged_count == 1
+    assert existing.has_poc is True
+
+
+def test_missing_cvss_is_populated_by_nvd(isolated_storage) -> None:
+    storage.save_vulnerabilities([make_vulnerability(cvss_score=None, severity=None)])
+    result = storage.save_vulnerabilities(
+        [make_vulnerability(source="nvd", cvss_score=7.5, severity="HIGH")]
+    )
+    existing = get_one(isolated_storage)
+
+    assert result.updated_count == 1
+    assert existing.cvss_score == 7.5
+    assert existing.severity == "HIGH"
+
+
+def test_existing_cvss_is_not_erased_by_missing_nvd_cvss(isolated_storage) -> None:
+    storage.save_vulnerabilities([make_vulnerability(cvss_score=9.1, severity="CRITICAL")])
+    result = storage.save_vulnerabilities(
+        [make_vulnerability(source="nvd", cvss_score=None, severity=None)]
+    )
+    existing = get_one(isolated_storage)
+
+    assert result.unchanged_count == 1
+    assert existing.cvss_score == 9.1
+    assert existing.severity == "CRITICAL"
+
+
+def test_nvd_newer_updated_at_updates_existing_record(isolated_storage) -> None:
+    old_updated_at = datetime(2099, 1, 1)
+    new_updated_at = datetime(2099, 1, 2)
+    storage.save_vulnerabilities([make_vulnerability(updated_at=old_updated_at)])
+    result = storage.save_vulnerabilities(
+        [make_vulnerability(source="nvd", updated_at=new_updated_at)]
+    )
+    existing = get_one(isolated_storage)
+
+    assert result.updated_count == 1
+    assert existing.updated_at == new_updated_at
+
+
+def test_nvd_older_updated_at_does_not_replace_newer_existing_value(
+    isolated_storage,
+) -> None:
+    old_updated_at = datetime(2099, 1, 1)
+    new_updated_at = datetime(2099, 1, 2)
+    storage.save_vulnerabilities([make_vulnerability(updated_at=new_updated_at)])
+    result = storage.save_vulnerabilities(
+        [make_vulnerability(source="nvd", updated_at=old_updated_at)]
+    )
+    existing = get_one(isolated_storage)
+
+    assert result.unchanged_count == 1
+    assert existing.updated_at == new_updated_at
+
+
+def test_same_published_at_with_timezone_difference_is_unchanged(
+    isolated_storage,
+) -> None:
+    storage.save_vulnerabilities(
+        [make_vulnerability(published_at=datetime(2099, 1, 1))]
+    )
+    result = storage.save_vulnerabilities(
+        [
+            make_vulnerability(
+                source="nvd",
+                published_at=datetime(2099, 1, 1, tzinfo=UTC),
+            )
+        ]
+    )
+
+    assert result.unchanged_count == 1
+
+
+def test_nvd_enrichment_preserves_existing_cisa_title_and_source(
+    isolated_storage,
+) -> None:
+    storage.save_vulnerabilities(
+        [
+            make_vulnerability(
+                source="cisa_kev",
+                source_url="https://www.cisa.gov/catalog",
+                title="CISA Title",
+                in_kev=True,
+            )
+        ]
+    )
+    result = storage.save_vulnerabilities(
+        [
+            make_vulnerability(
+                source="nvd",
+                source_url="https://nvd.nist.gov/vuln/detail/CVE-2099-0001",
+                title="NVD Title",
+                description="NVD description",
+            )
+        ]
+    )
+    existing = get_one(isolated_storage)
+
+    assert result.updated_count == 1
+    assert existing.source == "cisa_kev"
+    assert existing.source_url == "https://www.cisa.gov/catalog"
+    assert existing.title == "CISA Title"
+    assert existing.description == "NVD description"
 
 
 def test_populated_text_is_not_overwritten_by_empty_incoming_value(
