@@ -2,14 +2,14 @@ from loguru import logger
 
 from agents.base import BaseAgent
 from collectors.base import BaseCollector
-from collectors.dummy import DummyCollector
+from collectors.cisa_kev import CisaKevCollector
 from pipeline.collector_pipeline import CollectorPipeline
 
 
 class CollectorAgent(BaseAgent):
     def __init__(self) -> None:
         super().__init__(name="collector")
-        self.collectors: list[BaseCollector] = [DummyCollector()]
+        self.collectors: list[BaseCollector] = [CisaKevCollector()]
         logger.info("CollectorAgent initialized")
         logger.info(f"CollectorAgent collector count: {len(self.collectors)}")
 
@@ -21,7 +21,12 @@ class CollectorAgent(BaseAgent):
         total_inserted = 0
 
         for collector in self.collectors:
-            result = CollectorPipeline(collector).run()
+            try:
+                result = CollectorPipeline(collector).run()
+            except Exception as exc:
+                logger.exception(f"{collector.name} pipeline failed: {exc}")
+                continue
+
             total_fetched += result.fetched_count
             total_normalized += result.normalized_count
             total_rejected += result.rejected_count

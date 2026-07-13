@@ -1,0 +1,29 @@
+{
+  "title": "CISA Known Exploited Vulnerabilities Catalog",
+  "vulnerabilities": [
+    {
+      "cveID": "CVE-2024-0001",
+      "vendorProject": "Example Vendor",
+      "product": "Example Product",
+      "vulnerabilityName": "Example Product Command Injection Vulnerability",
+      "dateAdded": "2024-01-15",
+      "shortDescription": "Example Product contains a command injection vulnerability.",
+      "requiredAction": "Apply updates per vendor instructions.",
+      "dueDate": "2024-02-05",
+      "knownRansomwareCampaignUse": "Known",
+      "notes": "https://example.com/advisory"
+    },
+    {
+      "cveID": "CVE-2024-0002",
+      "vendorProject": "Another Vendor",
+      "product": "Another Product",
+      "vulnerabilityName": "Another Product Path Traversal Vulnerability",
+      "dateAdded": "2024-03-20",
+      "shortDescription": "Another Product contains a path traversal vulnerability.",
+      "requiredAction": "Apply mitigations or discontinue use.",
+      "dueDate": "2024-04-10",
+      "knownRansomwareCampaignUse": "Unknown",
+      "notes": ""
+    }
+  ]
+}

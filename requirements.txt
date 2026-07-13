@@ -3,3 +3,4 @@ python-dotenv
 loguru
 SQLAlchemy
 pytest
+httpx
