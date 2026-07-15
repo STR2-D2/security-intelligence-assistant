@@ -1,0 +1,97 @@
+category: framework
+
+keywords:
+  Spring:
+    aliases:
+      - Spring Framework
+      - Spring Boot
+      - Spring Cloud
+    tags:
+      - Java
+      - 开发框架
+    score: 25
+
+  Apache Struts:
+    aliases:
+      - Struts2
+      - Struts 2
+    tags:
+      - Java
+      - 开发框架
+    score: 30
+
+  Fastjson:
+    aliases:
+      - Alibaba Fastjson
+    tags:
+      - Java
+      - 序列化
+    score: 30
+
+  Log4j:
+    aliases:
+      - Apache Log4j
+      - Log4Shell
+    tags:
+      - Java
+      - 日志组件
+    score: 30
+
+  Jackson:
+    aliases:
+      - FasterXML Jackson
+      - Jackson Databind
+    tags:
+      - Java
+      - 序列化
+    score: 25
+
+  Apache Shiro:
+    aliases:
+      - Shiro
+    tags:
+      - Java
+      - 身份认证
+      - 开发框架
+    score: 25
+
+  ThinkPHP:
+    aliases:
+      - Think PHP
+    tags:
+      - PHP
+      - 开发框架
+    score: 25
+
+  Laravel:
+    aliases:
+      - Laravel Framework
+    tags:
+      - PHP
+      - 开发框架
+    score: 20
+
+  Django:
+    aliases:
+      - Django Framework
+    tags:
+      - Python
+      - 开发框架
+    score: 20
+
+  Flask:
+    aliases:
+      - Flask Framework
+    tags:
+      - Python
+      - 开发框架
+    score: 15
+
+  Node.js:
+    aliases:
+      - NodeJS
+      - Node JS
+    tags:
+      - JavaScript
+      - 运行时
+    score: 20

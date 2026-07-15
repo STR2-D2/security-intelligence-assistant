@@ -1,0 +1,69 @@
+category: office_erp
+
+keywords:
+  泛微:
+    aliases:
+      - Weaver
+      - E-Cology
+      - Ecology
+      - E-Office
+    tags:
+      - OA
+      - 办公系统
+      - 国产软件
+    score: 35
+
+  致远:
+    aliases:
+      - Seeyon
+      - 致远互联
+    tags:
+      - OA
+      - 办公系统
+      - 国产软件
+    score: 30
+
+  蓝凌:
+    aliases:
+      - Landray
+    tags:
+      - OA
+      - 办公系统
+      - 国产软件
+    score: 30
+
+  通达OA:
+    aliases:
+      - Tongda OA
+      - Tongda
+    tags:
+      - OA
+      - 办公系统
+      - 国产软件
+    score: 30
+
+  用友:
+    aliases:
+      - UFIDA
+      - Yonyou
+      - YonSuite
+      - 用友NC
+      - U8
+    tags:
+      - ERP
+      - 财务系统
+      - 国产软件
+    score: 35
+
+  金蝶:
+    aliases:
+      - Kingdee
+      - K3
+      - EAS
+      - Cloud Star
+      - 金蝶云星空
+    tags:
+      - ERP
+      - 财务系统
+      - 国产软件
+    score: 35

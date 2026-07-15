@@ -4,3 +4,4 @@ loguru
 SQLAlchemy
 pytest
 httpx
+PyYAML

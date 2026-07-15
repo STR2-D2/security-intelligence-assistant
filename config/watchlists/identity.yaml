@@ -1,0 +1,73 @@
+category: identity
+
+keywords:
+  SSO:
+    aliases:
+      - Single Sign-On
+      - Single Sign On
+      - Single Signon
+    tags:
+      - 身份认证
+      - 单点登录
+    score: 30
+
+  Active Directory:
+    aliases:
+      - Microsoft Active Directory
+      - Windows Active Directory
+      - AD
+    tags:
+      - 身份认证
+      - 微软
+      - 目录服务
+    score: 30
+
+  LDAP:
+    aliases:
+      - OpenLDAP
+      - Lightweight Directory Access Protocol
+    tags:
+      - 身份认证
+      - 目录服务
+    score: 20
+
+  SAML:
+    aliases:
+      - Security Assertion Markup Language
+    tags:
+      - 身份认证
+      - 联邦认证
+    score: 25
+
+  OAuth:
+    aliases:
+      - OAuth 2.0
+      - OAuth2
+    tags:
+      - 身份认证
+      - 授权协议
+    score: 25
+
+  OpenID Connect:
+    aliases:
+      - OIDC
+    tags:
+      - 身份认证
+      - 联邦认证
+    score: 25
+
+  CAS:
+    aliases:
+      - Central Authentication Service
+    tags:
+      - 身份认证
+      - 单点登录
+    score: 20
+
+  Keycloak:
+    aliases:
+      - Red Hat Keycloak
+    tags:
+      - 身份认证
+      - 单点登录
+    score: 30

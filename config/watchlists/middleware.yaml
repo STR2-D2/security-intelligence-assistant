@@ -1,0 +1,84 @@
+category: middleware
+
+keywords:
+  Apache HTTP Server:
+    aliases:
+      - Apache HTTPD
+      - Apache Web Server
+    tags:
+      - Web服务
+      - 中间件
+    score: 20
+
+  Nginx:
+    aliases:
+      - nginx
+    tags:
+      - Web服务
+      - 中间件
+    score: 20
+
+  Tomcat:
+    aliases:
+      - Apache Tomcat
+    tags:
+      - Java
+      - Web容器
+      - 中间件
+    score: 25
+
+  IIS:
+    aliases:
+      - Microsoft IIS
+      - Internet Information Services
+    tags:
+      - Web服务
+      - 微软
+      - 中间件
+    score: 25
+
+  WebLogic:
+    aliases:
+      - Oracle WebLogic
+      - WebLogic Server
+    tags:
+      - Java
+      - 应用服务器
+      - 中间件
+    score: 30
+
+  WebSphere:
+    aliases:
+      - IBM WebSphere
+    tags:
+      - Java
+      - 应用服务器
+      - 中间件
+    score: 25
+
+  JBoss:
+    aliases:
+      - WildFly
+      - Red Hat JBoss
+    tags:
+      - Java
+      - 应用服务器
+      - 中间件
+    score: 25
+
+  Jenkins:
+    aliases:
+      - Jenkins Automation Server
+    tags:
+      - DevOps
+      - CI/CD
+    score: 25
+
+  GitLab:
+    aliases:
+      - GitLab Enterprise Edition
+      - GitLab Community Edition
+    tags:
+      - DevOps
+      - 代码平台
+    score: 25

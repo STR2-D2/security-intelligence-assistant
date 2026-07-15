@@ -1,0 +1,77 @@
+category: database
+
+keywords:
+  MySQL:
+    aliases:
+      - MySQL Server
+    tags:
+      - 数据库
+      - 关系型数据库
+    score: 20
+
+  PostgreSQL:
+    aliases:
+      - Postgres
+    tags:
+      - 数据库
+      - 关系型数据库
+    score: 20
+
+  SQL Server:
+    aliases:
+      - Microsoft SQL Server
+      - MSSQL
+    tags:
+      - 数据库
+      - 微软
+      - 关系型数据库
+    score: 25
+
+  Oracle Database:
+    aliases:
+      - Oracle DB
+    tags:
+      - 数据库
+      - 关系型数据库
+    score: 25
+
+  MongoDB:
+    aliases:
+      - MongoDB Server
+    tags:
+      - 数据库
+      - NoSQL
+    score: 20
+
+  Redis:
+    aliases:
+      - Redis Server
+    tags:
+      - 数据库
+      - 缓存
+      - NoSQL
+    score: 25
+
+  Elasticsearch:
+    aliases:
+      - Elastic Search
+    tags:
+      - 搜索引擎
+      - 数据平台
+    score: 25
+
+  OpenSearch:
+    aliases:
+      - Amazon OpenSearch
+    tags:
+      - 搜索引擎
+      - 数据平台
+    score: 20
+
+  ClickHouse:
+    aliases:
+      - ClickHouse Database
+    tags:
+      - 数据库
+      - 数据分析
+    score: 20

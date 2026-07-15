@@ -1,0 +1,53 @@
+category: operating_system
+
+keywords:
+  Windows:
+    aliases:
+      - Microsoft Windows
+      - Windows Server
+    tags:
+      - 操作系统
+      - 微软
+    score: 20
+
+  Linux:
+    aliases:
+      - Ubuntu
+      - Debian
+      - CentOS
+      - Rocky Linux
+      - AlmaLinux
+      - Red Hat Enterprise Linux
+      - RHEL
+    tags:
+      - 操作系统
+      - Linux
+    score: 20
+
+  VMware:
+    aliases:
+      - VMware ESXi
+      - ESXi
+      - vCenter
+    tags:
+      - 虚拟化
+      - 基础设施
+    score: 25
+
+  Docker:
+    aliases:
+      - Docker Engine
+      - Docker Desktop
+    tags:
+      - 容器
+      - 云原生
+    score: 20
+
+  Kubernetes:
+    aliases:
+      - Kubernetes
+      - K8s
+    tags:
+      - 容器
+      - 云原生
+    score: 25

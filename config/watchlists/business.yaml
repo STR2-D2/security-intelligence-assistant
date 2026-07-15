@@ -1,0 +1,166 @@
+category: business
+
+keywords:
+  电商:
+    aliases:
+      - e-commerce
+      - ecommerce
+      - online shopping
+      - shopping platform
+      - online store
+      - marketplace
+    tags:
+      - 电商
+      - 核心业务
+    score: 30
+
+  支付:
+    aliases:
+      - payment
+      - payment gateway
+      - online payment
+      - checkout
+    tags:
+      - 支付
+      - 资金安全
+      - 核心业务
+    score: 35
+
+  订单:
+    aliases:
+      - order system
+      - order management
+      - OMS
+    tags:
+      - 电商
+      - 订单系统
+      - 核心业务
+    score: 25
+
+  仓储:
+    aliases:
+      - WMS
+      - Warehouse Management System
+      - warehouse system
+    tags:
+      - 仓储
+      - 供应链
+    score: 25
+
+  供应链:
+    aliases:
+      - SCM
+      - Supply Chain Management
+      - supply chain
+    tags:
+      - 供应链
+      - 核心业务
+    score: 25
+
+  ERP:
+    aliases:
+      - Enterprise Resource Planning
+    tags:
+      - ERP
+      - 核心业务
+    score: 30
+
+  CRM:
+    aliases:
+      - Customer Relationship Management
+    tags:
+      - CRM
+      - 客户数据
+    score: 25
+
+  OA:
+    aliases:
+      - Office Automation
+      - office system
+    tags:
+      - OA
+      - 办公系统
+    score: 25
+
+  财务:
+    aliases:
+      - finance system
+      - accounting system
+      - financial system
+    tags:
+      - 财务系统
+      - 资金安全
+    score: 30
+
+  人力资源:
+    aliases:
+      - HR system
+      - Human Resource Management
+      - HRM
+    tags:
+      - 人力资源
+      - 个人信息
+    score: 20
+
+  客服:
+    aliases:
+      - customer service system
+      - contact center
+      - call center
+    tags:
+      - 客服系统
+      - 客户数据
+    score: 20
+
+  营销:
+    aliases:
+      - marketing platform
+      - marketing automation
+      - promotion system
+    tags:
+      - 营销系统
+      - 客户数据
+    score: 20
+
+  会员:
+    aliases:
+      - membership system
+      - loyalty system
+      - user center
+    tags:
+      - 会员系统
+      - 个人信息
+      - 电商
+    score: 25
+
+  API网关:
+    aliases:
+      - API Gateway
+      - gateway service
+    tags:
+      - API
+      - 互联网入口
+      - 核心基础设施
+    score: 30
+
+  消息队列:
+    aliases:
+      - message queue
+      - message broker
+      - Apache Kafka
+      - RabbitMQ
+      - RocketMQ
+    tags:
+      - 消息队列
+      - 核心基础设施
+    score: 25
+
+  对象存储:
+    aliases:
+      - object storage
+      - S3 compatible storage
+      - MinIO
+    tags:
+      - 对象存储
+      - 数据安全
+    score: 25

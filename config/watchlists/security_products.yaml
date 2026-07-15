@@ -1,0 +1,123 @@
+category: security_product
+
+keywords:
+  Fortinet:
+    aliases:
+      - FortiGate
+      - FortiOS
+      - FortiManager
+      - FortiAnalyzer
+    tags:
+      - 安全设备
+      - 防火墙
+      - VPN
+      - 互联网入口
+    score: 35
+
+  Palo Alto:
+    aliases:
+      - PAN-OS
+      - GlobalProtect
+      - Palo Alto Networks
+    tags:
+      - 安全设备
+      - 防火墙
+      - VPN
+      - 互联网入口
+    score: 35
+
+  Cisco:
+    aliases:
+      - Cisco ASA
+      - Firepower
+      - Cisco IOS
+      - Cisco IOS XE
+    tags:
+      - 网络设备
+      - 安全设备
+      - 互联网入口
+    score: 30
+
+  Ivanti:
+    aliases:
+      - Ivanti Connect Secure
+      - Pulse Secure
+    tags:
+      - VPN
+      - 安全设备
+      - 互联网入口
+    score: 35
+
+  Citrix:
+    aliases:
+      - NetScaler
+      - Citrix ADC
+      - Citrix Gateway
+    tags:
+      - VPN
+      - 应用交付
+      - 互联网入口
+    score: 35
+
+  深信服:
+    aliases:
+      - Sangfor
+      - Sangfor SSL VPN
+    tags:
+      - 安全设备
+      - VPN
+      - 国产软件
+    score: 35
+
+  天融信:
+    aliases:
+      - TopSec
+    tags:
+      - 安全设备
+      - 国产软件
+    score: 30
+
+  奇安信:
+    aliases:
+      - Qianxin
+      - QAX
+    tags:
+      - 安全设备
+      - 国产软件
+    score: 30
+
+  启明星辰:
+    aliases:
+      - Venustech
+    tags:
+      - 安全设备
+      - 国产软件
+    score: 30
+
+  安恒:
+    aliases:
+      - DBAPPSecurity
+      - DAS Security
+    tags:
+      - 安全设备
+      - 国产软件
+    score: 30
+
+  WAF:
+    aliases:
+      - Web Application Firewall
+    tags:
+      - 安全设备
+      - Web安全
+      - 互联网入口
+    score: 30
+
+  VPN:
+    aliases:
+      - SSL VPN
+      - IPsec VPN
+      - remote access gateway
+    tags:
+      - VPN
+      - 互联网入口
+    score: 30
