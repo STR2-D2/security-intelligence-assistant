@@ -6,3 +6,7 @@ logs/*.log
 *.db
 *.db.bak
 .pytest_cache/
+
+# Generated reports
+reports/*.md
+!reports/README.md
