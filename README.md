@@ -1,5 +1,7 @@
 # Security Intelligence Assistant
 
+![Tests](https://github.com/STR2-D2/security-intelligence-assistant/actions/workflows/test.yml/badge.svg)
+
 Security Intelligence Assistant is an automated vulnerability intelligence and advisory platform for enterprise security engineers.
 
 It collects vulnerability advisories, normalizes them into a reusable data model, evaluates generic security risk, applies enterprise watchlists, generates an explainable Markdown report, and sends the report by SMTP email.

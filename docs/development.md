@@ -37,6 +37,23 @@ Current baseline:
 
 Tests should not access real SMTP servers, external APIs, or the local development database unless a task explicitly asks for live verification.
 
+## Continuous Integration
+
+GitHub Actions runs the test suite on every push and pull request.
+
+The CI workflow:
+
+```text
+checkout
+setup Python 3.11 and 3.12
+install requirements.txt
+run python -m pytest
+```
+
+The workflow sets `PYTHONPATH=.` and uses pip dependency caching to keep repeated runs faster.
+
+CI exists to catch regressions before changes are merged. Local tests should still be run before committing.
+
 ## Git Workflow
 
 Recommended flow:
