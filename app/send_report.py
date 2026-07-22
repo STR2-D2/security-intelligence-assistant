@@ -92,16 +92,17 @@ def build_email_message(
 
 
 def build_sender() -> SmtpEmailSender:
+    smtp_settings = settings.resolve_smtp_settings()
     return SmtpEmailSender(
-        smtp_host=settings.smtp_host,
-        smtp_port=settings.smtp_port,
-        smtp_username=settings.smtp_username,
-        smtp_password=settings.smtp_password,
-        smtp_from_address=settings.smtp_from_address,
-        smtp_from_name=settings.smtp_from_name,
-        smtp_use_tls=settings.smtp_use_tls,
-        smtp_use_ssl=settings.smtp_use_ssl,
-        smtp_timeout_seconds=settings.smtp_timeout_seconds,
+        smtp_host=smtp_settings["smtp_host"],
+        smtp_port=smtp_settings["smtp_port"],
+        smtp_username=smtp_settings["smtp_username"],
+        smtp_password=smtp_settings["smtp_password"],
+        smtp_from_address=smtp_settings["smtp_from_address"],
+        smtp_from_name=smtp_settings["smtp_from_name"],
+        smtp_use_tls=smtp_settings["smtp_use_tls"],
+        smtp_use_ssl=smtp_settings["smtp_use_ssl"],
+        smtp_timeout_seconds=smtp_settings["smtp_timeout_seconds"],
     )
 
 
